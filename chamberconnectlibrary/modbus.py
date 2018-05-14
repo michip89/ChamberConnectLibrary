@@ -189,20 +189,20 @@ class Modbus(object):
 
     def decode_packet(self, packet, spacket):
         '''Decode the modbus request packet.'''
-        fcode = struct.unpack(">B", packet[1])[0]
-        addr = struct.unpack(">B", packet[0])[0]
+        fcode = struct.unpack(">B", bytes([packet[1]]))[0]
+        addr = struct.unpack(">B", bytes([packet[0]]))[0]
         if self.address != addr:
             shex = ":".join("{:02x}".format(ord(c) for c in spacket))
             rhex = ":".join("{:02x}".format(ord(c) for c in packet))
             raise ModbusError("Address error; Sent=%s, Recieved=%s" % (shex, rhex))
         if fcode > 127:
-            ecode = struct.unpack(">B", packet[2])[0]
+            ecode = struct.unpack(">B", bytes([packet[2]]))[0]
             ttp = (ecode, self.errorMessages.get(ecode, 'Unknown error code'))
             raise ModbusError('Modbus Error: Exception code = %d(%s)' % ttp)
 
         if fcode == 3: #Read holding register(s)
-            cnt = struct.unpack(">B", packet[2])[0]/2
-            return struct.unpack(">%dH" % cnt, packet[3:])
+            cnt = struct.unpack(">B", bytes([packet[2]]))[0] / 2
+            return struct.unpack(">%dH" % cnt, bytes(packet[3:]))
         elif fcode == 6:
             pass #nothing is required
         elif fcode == 16:
