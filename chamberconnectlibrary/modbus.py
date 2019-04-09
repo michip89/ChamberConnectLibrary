@@ -254,7 +254,7 @@ class ModbusRTU(Modbus):
         '''
         crc = 0xFFFF
         for i in data:
-            crc = crc ^ ord(i)
+            crc = crc ^ i
             for _ in range(8):
                 tmp = crc & 1
                 crc = crc >> 1
@@ -275,10 +275,11 @@ class ModbusRTU(Modbus):
         self.serial.write(packet + crc)
         time.sleep(self.pause)
         head = self.serial.read(2)
+        #print(head)
         if len(head) == 0:
             raise ModbusError("The slave device did not respond.")
-        raddress = struct.unpack('>B', head[0])[0]
-        fcode = struct.unpack('>B', head[1])[0]
+        raddress = head[0]
+        fcode = head[1]
         if fcode == 16 or fcode == 6:
             body = self.serial.read(4)
         elif fcode == 3:
