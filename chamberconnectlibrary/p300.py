@@ -50,6 +50,7 @@ class P300(object):
                 host=kwargs.get('host'),
                 address=kwargs.get('address'),
                 port=kwargs.get('port'),
+                timeout=kwargs.get('timeout'),
             )
 
     def __del__(self):
