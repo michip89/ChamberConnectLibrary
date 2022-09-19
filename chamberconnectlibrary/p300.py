@@ -48,7 +48,8 @@ class P300(object):
         else:
             self.ctlr = EspecTCP(
                 host=kwargs.get('host'),
-                address=kwargs.get('address')
+                address=kwargs.get('address'),
+                port=kwargs.get('port'),
             )
 
     def __del__(self):

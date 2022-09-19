@@ -34,7 +34,8 @@ if __name__ == '__main__':
             interface=sys.argv[2],
             serialport=sys.argv[3],
             host=sys.argv[3],
-            baudrate=int(sys.argv[4]) if len(sys.argv) == 5 else 9600
+            port=sys.argv[4],
+            baudrate=int(sys.argv[5]) if len(sys.argv) == 6 else 9600
         )
     except Exception:
         traceback.print_exc()
@@ -46,4 +47,5 @@ if __name__ == '__main__':
         print('\t           "RTU":Serial connection when "controller" is "WatlowF4T"')
         print('\t           "TCP":TCP connection')
         print('\t"hostORserialport": hostname for TCP, or serial port for RTU/Serial')
+        print('\t"Port": port for TCP')
         print('\t"baudrate": The baudrate for RTU/Serial, optional(default=9600)')

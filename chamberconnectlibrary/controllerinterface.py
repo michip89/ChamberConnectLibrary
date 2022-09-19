@@ -50,6 +50,7 @@ class ControllerInterface(metaclass=ABCMeta):
         '''Setup properties of all controllers of the chamberconnectlibrary'''
         self.client = None
         self.host = kwargs.get('host')
+        self.port = kwargs.get('port')
         self.interface = kwargs.get('interface')
         self.adr = kwargs.get('adr', 1)
         self.serialport = kwargs.get('serialport')
