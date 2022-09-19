@@ -108,7 +108,7 @@ class EspecTCP(object):
         raises:
             EspecError
         '''
-		message += self.delimeter
+        message += self.delimeter
         message = message.encode('ascii', 'ignore')
         # TCP forwarder doesnt handle address properly so we are ignoring it.
         # if self.address:
