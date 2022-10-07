@@ -51,6 +51,7 @@ class ControllerInterface(metaclass=ABCMeta):
         self.client = None
         self.host = kwargs.get('host')
         self.port = kwargs.get('port')
+        self.timeout = kwargs.get('timeout', 3)
         self.interface = kwargs.get('interface')
         self.adr = kwargs.get('adr', 1)
         self.serialport = kwargs.get('serialport')

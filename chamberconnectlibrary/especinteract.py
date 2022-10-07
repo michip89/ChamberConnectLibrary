@@ -78,11 +78,8 @@ class EspecTCP(object):
     Handles low level communication to espec corp controllers via serial TCP
     '''
     def __init__(self, **kwargs):
-        try:
-            self.socket = socket.create_connection((kwargs.get('host'), kwargs.get('port', 10001)), timeout=kwargs.get('timeout', 3))
-        except (ConnectionRefusedError, socket.timeout):
-            raise Exception("Connection unsuccessful")
-        self.socket.settimeout(kwargs.get('timeout', 3))
+        self.socket = socket.create_connection((kwargs.get('host') or "127.0.0.1", kwargs.get('port') or 57732), timeout=kwargs.get('timeout') or 3)
+        self.socket.settimeout(kwargs.get('timeout') or 3)
         # self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # self.socket.setblocking(True)
         # self.socket.connect((kwargs.get('host'), kwargs.get('port', 10001)))

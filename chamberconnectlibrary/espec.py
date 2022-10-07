@@ -75,7 +75,7 @@ class Espec(ControllerInterface):
         connect to the controller using the paramters provided on class initialization
         '''
         args = {'serialport':self.serialport, 'baudrate':self.baudrate, 'host':self.host,
-                'address':self.adr, 'port': int(self.port)}
+                'address':self.adr, 'port': int(self.port), 'timeout': int(self.timeout)}
         if self.ctlr_type == 'P300':
             self.client = P300(self.interface, **args)
         elif self.ctlr_type == 'SCP220':
